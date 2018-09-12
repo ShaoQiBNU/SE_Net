@@ -9,19 +9,19 @@ Squeeze-and-Excitation Networks
 
 > SE Net的核心设计是SE building block——Squeeze和Excitation，如图所示：
 
-imag111111111
+![image](https://github.com/ShaoQiBNU/SE_Net/blob/master/images/1.png)
 
 ## (一) <img src="https://latex.codecogs.com/svg.latex?\LARGE&space;F_{tr}" title="\LARGE F_{tr}" />
 
 > X——>U的实现过程是<img src="https://latex.codecogs.com/svg.latex?F_{tr}" title="F_{tr}" />，一般就是CNN中的一些普通的操作，例如卷积或一组卷积。输入输出定义如下：
 
-images11111
+![image](https://github.com/ShaoQiBNU/SE_Net/blob/master/images/2.png)
 
 ## (二) Squeeze: Global InformationEmbedding
 
 > Squeeze操作就是在得到U（多个feature map）之后采用全局平均池化操作对其每个feature map进行压缩，使其C个feature map最后变成1 x 1 x C的实数数列，如公式所示：
 
-img11111111
+![image](https://github.com/ShaoQiBNU/SE_Net/blob/master/images/3.png)
 
 > 一般CNN中的每个通道学习到的滤波器都对局部感受野进行操作，因此U中每个feature map都无法利用其它feature map的上下文信息，而且网络较低的层次上其感受野尺寸都是很小的，这样情况就会更严重。 U（多个feature map）可以被解释为局部描述的子集合，这些描述的统计信息对于整个图像来说是有表现力的。论文选择最简单的全局平均池化操作，从而使其具有全局的感受野，使得网络低层也能利用全局信息。
 
@@ -29,7 +29,7 @@ img11111111
 
 > 接下来就是Excitation操作，该过程为两个全连接操作，如公式所示：
 
-
+![image](https://github.com/ShaoQiBNU/SE_Net/blob/master/images/4.png)
 
 ### 1. 全连接层1
 > 公式如下：<img src="https://latex.codecogs.com/svg.latex?\delta&space;(W_{1}z)" title="\delta (W_{1}z)" />
@@ -44,7 +44,8 @@ img11111111
 ## (四) Scale
 
 > scale公式如下：
-imag111
+
+![image](https://github.com/ShaoQiBNU/SE_Net/blob/master/images/5.png)
 
 > 得到s之后，就可以对原来的tensor U做channel-wise multiplication操作——uc是一个二维矩阵，sc是一个数，也就是权重，因此相当于把uc矩阵中的每个值都乘以sc，该过程对应图中的Fscale。
 
@@ -52,11 +53,11 @@ imag111
 
 > 将SE Net添加进Inception和ResNet中，SE building block结构如图所示：
 
-imag111111
+![image](https://github.com/ShaoQiBNU/SE_Net/blob/master/images/6.png)
 
 > SE-ResNet-50和SE-ResNeXt-50具体结构如图所示：
 
-imag1111111
+![image](https://github.com/ShaoQiBNU/SE_Net/blob/master/images/7.png)
 
 # 四. 代码
 
