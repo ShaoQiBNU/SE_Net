@@ -37,7 +37,7 @@ img11111111
 > squeeze得到的结果是z，z的维度是1 x 1 x C；W1的维度是C/r * C，其中r是缩放参数，在文中取的是16，这个参数的目的是为了减少channel个数从而降低计算量；<img src="https://latex.codecogs.com/svg.latex?W_{1}z" title="W_{1}z" />的维度为1 x 1 x C/r，之后经过一个ReLU层，输出的维度不变。
 
 ### 2. 全连接层2
-> 公式如下：<img src="https://latex.codecogs.com/svg.latex?\delta&space;(W{_2}\delta&space;(W_{1}z))" title="\delta (W{_2}\delta (W_{1}z))" />
+> 公式如下：<img src="https://latex.codecogs.com/svg.latex?\sigma&space;(W{_2}\delta(W_{1}z))" title="\sigma (W{_2}\delta(W_{1}z))" />
 
 > 全连接层1的结果和W2相乘，W2的维度是C x C/r，输出的维度是1 x 1 x C；最后再经过sigmoid函数，得到s，s的维度是1 x 1 x C，C表示channel数目。s是本文的核心，它是用来刻画tensor U中C个feature map的权重。而且这个权重是通过前面这些全连接层和非线性层学习得到的，因此可以end-to-end训练。这两个全连接层的作用就是融合各通道的feature map信息，因为前面的squeeze都是在某个channel的feature map里面操作。
 
